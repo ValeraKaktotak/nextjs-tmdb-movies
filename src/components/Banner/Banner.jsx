@@ -26,7 +26,7 @@ const Banner = async () => {
   const movie = await getData()
   console.log(movie)
   return (
-    <div className='w-full h-full pt-[8vh]'>
+    <div className='w-full h-[100vh] pt-[8vh]'>
       {movie && (
         <div className='relative w-full h-[100vh] sm:h-[80vh]'>
           <Image

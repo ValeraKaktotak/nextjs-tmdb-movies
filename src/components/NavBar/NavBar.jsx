@@ -11,7 +11,7 @@ const NavBar = () => {
         </div>
         <div>
           <Link href='/location'>
-            <h1 className='text-[2.5vmin]'>Location</h1>
+            <h2 className='text-[1.95vmin]'>Location</h2>
           </Link>
         </div>
       </div>
