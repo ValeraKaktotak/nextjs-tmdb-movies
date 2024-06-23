@@ -1,3 +1,7 @@
 export { default as Banner } from './Banner/Banner'
+export { default as HeadlineNav } from './HeadlineNav/HeadlineNav'
 export { default as Location } from './Location/Location'
+export { default as Movie } from './Movie/Movie'
 export { default as NavBar } from './NavBar/NavBar'
+export { default as Trending } from './Trending/Trending'
+export { default as Tv } from './Tv/Tv'

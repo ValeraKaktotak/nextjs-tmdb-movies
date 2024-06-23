@@ -24,7 +24,7 @@ const getData = async () => {
 
 const Banner = async () => {
   const movie = await getData()
-  console.log(movie)
+
   return (
     <div className='w-full h-[100vh] pt-[8vh]'>
       {movie && (
