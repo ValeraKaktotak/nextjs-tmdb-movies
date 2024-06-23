@@ -26,7 +26,7 @@ const Banner = async () => {
   const movie = await getData()
 
   return (
-    <div className='w-full h-[100vh] pt-[8vh]'>
+    <div className='w-full h-full pt-[8vh]'>
       {movie && (
         <div className='relative w-full h-[100vh] sm:h-[80vh]'>
           <Image
@@ -35,7 +35,7 @@ const Banner = async () => {
             fill
             className='object-cover'
           />
-          <div className='absolute bottom-[10%] left-0 bg-gradient-to-t from-black to-transparent p-4 w-full sm:w-[50%] rounded-lg'>
+          <div className='absolute bottom-[12%] left-0 bg-gradient-to-t from-black to-transparent p-4 w-full sm:w-[50%] rounded-lg'>
             <h1 className='text-white text-2xl sm:text-4xl font-bold'>
               {movie.title}
             </h1>

@@ -5,7 +5,7 @@ const key = process.env.API_KEY
 export async function GET() {
   try {
     const response = await axios.get(
-      `https://api.themoviedb.org/3/trending/all/week?api_key${key}`
+      `https://api.themoviedb.org/3/trending/all/week?api_key=${key}`
     )
     return NextResponse.json(response.data)
   } catch (error) {

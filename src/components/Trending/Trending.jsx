@@ -1,4 +1,5 @@
-const Trending = () => {
+const Trending = ({ trendingData, loading }) => {
+  console.log(trendingData)
   return <div>Trending</div>
 }
 

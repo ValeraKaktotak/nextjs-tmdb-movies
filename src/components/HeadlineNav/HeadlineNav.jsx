@@ -52,7 +52,7 @@ export default function HeadlineNav() {
   React.useEffect(() => {
     const fetchData = async () => {
       try {
-        const movie = await axios.get('/api/movie')
+        const movie = await axios.get('/api/movies')
         setMovieData(movie.data.results)
         setLoading(false)
       } catch (error) {
@@ -83,7 +83,7 @@ export default function HeadlineNav() {
   }
 
   return (
-    <Box sx={{ width: '100%', bgcolor: 'papayawhip' }}>
+    <Box sx={{ width: '100%', bgcolor: 'papayawhip', p: 5 }}>
       <Tabs
         TabIndicatorProps={{
           sx: {
