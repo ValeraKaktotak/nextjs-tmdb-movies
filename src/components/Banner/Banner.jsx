@@ -28,7 +28,7 @@ const Banner = async () => {
   return (
     <div className='w-full h-full pt-[8vh]'>
       {movie && (
-        <div className='relative w-full h-[100vh] sm:h-[80vh]'>
+        <div className='relative w-full h-[80vh]'>
           <Image
             src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
             alt={movie.title}
