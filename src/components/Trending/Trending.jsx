@@ -1,11 +1,10 @@
 'use client'
-import { Badge } from '@mui/material'
+import { Badge, Pagination, Stack } from '@mui/material'
 import axios from 'axios'
 import Image from 'next/image'
 import { useState } from 'react'
 
 const Trending = ({ trendingData, loading }) => {
-  console.log(trendingData)
   const [currentPage, setCurrentPage] = useState(1)
   const [itemsPerPage, setItemsPerPage] = useState(15)
   const [open, setOpen] = useState(false)
@@ -101,6 +100,18 @@ const Trending = ({ trendingData, loading }) => {
             </Badge>
           </div>
         ))}
+      </div>
+      <div className='flex justify-center w-full pt-10 p-3'>
+        <Stack spacing={5}>
+          <Pagination
+            count={Math.ceil(trendingData.length / itemsPerPage)}
+            onChange={handlePageChange}
+            page={currentPage}
+            variant='outlined'
+            color='primary'
+            className='pagination custom'
+          />
+        </Stack>
       </div>
     </>
   )
