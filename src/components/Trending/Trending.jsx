@@ -1,13 +1,12 @@
 'use client'
+import { PaginationComponent } from '@/components'
 import PlayArrowIcon from '@mui/icons-material/PlayArrow'
 import {
   Badge,
   Dialog,
   DialogContent,
   DialogTitle,
-  IconButton,
-  Pagination,
-  Stack
+  IconButton
 } from '@mui/material'
 import axios from 'axios'
 import Image from 'next/image'
@@ -16,7 +15,7 @@ import YouTube from 'react-youtube'
 
 const Trending = ({ trendingData, loading }) => {
   const [currentPage, setCurrentPage] = useState(1)
-  const [itemsPerPage, setItemsPerPage] = useState(15)
+  const [itemsPerPage, setItemsPerPage] = useState(10)
   const [open, setOpen] = useState(false)
   const [selectedTitle, setSelectedTitle] = useState(null)
   const [trailerKey, setTrailerKey] = useState(null)
@@ -110,17 +109,11 @@ const Trending = ({ trendingData, loading }) => {
           </div>
         ))}
       </div>
-      <div className='flex justify-center w-full pt-10 p-3'>
-        <Stack spacing={5}>
-          <Pagination
-            count={Math.ceil(trendingData.length / itemsPerPage)}
-            onChange={handlePageChange}
-            page={currentPage}
-            variant='outlined'
-            color='primary'
-          />
-        </Stack>
-      </div>
+      <PaginationComponent
+        count={Math.ceil(trendingData.length / itemsPerPage)}
+        handlePageChange={handlePageChange}
+        currentPage={currentPage}
+      />
       <Dialog
         open={open}
         onClose={handleClickClose}
