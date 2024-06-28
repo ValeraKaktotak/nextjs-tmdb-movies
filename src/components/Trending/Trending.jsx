@@ -1,49 +1,27 @@
 'use client'
 import { ModalMui, PaginationComponent } from '@/components'
 import { Badge } from '@mui/material'
-import axios from 'axios'
 import Image from 'next/image'
 import { useState } from 'react'
 
 const Trending = ({ trendingData, loading }) => {
+  //pagination data
   const [currentPage, setCurrentPage] = useState(1)
   const [itemsPerPage, setItemsPerPage] = useState(10)
+
+  //modal data
   const [open, setOpen] = useState(false)
   const [selectedTitle, setSelectedTitle] = useState(null)
-  const [trailerKey, setTrailerKey] = useState(null)
-  const [showTrailer, setShowTrailer] = useState(false)
 
   const indexOfLastItem = currentPage * itemsPerPage
   const indexOfFirstItem = indexOfLastItem - itemsPerPage
   const currentItems = trendingData.slice(indexOfFirstItem, indexOfLastItem)
 
-  const handlePageChange = (event, value) => {
-    setCurrentPage(value)
-  }
   const handleClickOpen = (title) => {
     setSelectedTitle(title)
     setOpen(true)
-    setShowTrailer(false)
-    setTrailerKey(null)
   }
-  const handleClickClose = (title) => {
-    setSelectedTitle(null)
-    setOpen(false)
-    setShowTrailer(null)
-    setTrailerKey(false)
-  }
-  const handlePlayTrailer = async (mediaType, id) => {
-    try {
-      const response = await axios.post('/api/trailer', {
-        media_type: mediaType,
-        id
-      })
-      setTrailerKey(response.data.trailerKey)
-      setShowTrailer(true)
-    } catch (error) {
-      console.log('Failed to fetch Trailer', error)
-    }
-  }
+
   if (loading) {
     return (
       <div className='flex justify-center items-center h-screen w-full'>
@@ -103,15 +81,14 @@ const Trending = ({ trendingData, loading }) => {
       </div>
       <PaginationComponent
         count={Math.ceil(trendingData.length / itemsPerPage)}
-        handlePageChange={handlePageChange}
         currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
       />
       <ModalMui
         selectedTitle={selectedTitle}
-        trailerKey={trailerKey}
-        handleClickClose={handleClickClose}
-        handlePlayTrailer={handlePlayTrailer}
+        setSelectedTitle={setSelectedTitle}
         open={open}
+        setOpen={setOpen}
       />
     </>
   )

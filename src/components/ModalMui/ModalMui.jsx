@@ -1,16 +1,31 @@
 'use client'
 import PlayArrowIcon from '@mui/icons-material/PlayArrow'
 import { Dialog, DialogContent, DialogTitle, IconButton } from '@mui/material'
+import axios from 'axios'
 import Image from 'next/image'
+import { useState } from 'react'
 import YouTube from 'react-youtube'
 
-const ModalMui = ({
-  selectedTitle,
-  trailerKey,
-  handleClickClose,
-  handlePlayTrailer,
-  open
-}) => {
+const ModalMui = ({ open, setOpen, selectedTitle, setSelectedTitle }) => {
+  const [trailerKey, setTrailerKey] = useState(null)
+
+  const handleClickClose = (title) => {
+    setSelectedTitle(null)
+    setOpen(false)
+    setTrailerKey(false)
+  }
+  const handlePlayTrailer = async (mediaType, id) => {
+    try {
+      const response = await axios.post('/api/trailer', {
+        media_type: mediaType,
+        id
+      })
+      setTrailerKey(response.data.trailerKey)
+    } catch (error) {
+      console.log('Failed to fetch Trailer', error)
+    }
+  }
+
   return (
     <Dialog
       open={open}
