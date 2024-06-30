@@ -1,14 +1,12 @@
 'use client'
-import { ModalMui, PaginationComponent } from '@/components'
+import { ModalMui, PaginationComponent, Search } from '@/components'
 import { Badge } from '@mui/material'
-import axios from 'axios'
 import Image from 'next/image'
 import { useState } from 'react'
-import { AiOutlineClose, AiOutlineSearch } from 'react-icons/ai'
+// import { AiOutlineClose, AiOutlineSearch } from 'react-icons/ai'
 
 const Tv = ({ tvData, loading }) => {
-  //search data
-  const [tvSearch, setTvSearch] = useState('')
+  // //search data
   const [searchData, setSearchData] = useState([])
 
   //pagination data
@@ -32,29 +30,6 @@ const Tv = ({ tvData, loading }) => {
     setOpen(true)
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    setIsLoading(true)
-    try {
-      const response = await axios.post('/api/searchtv', { tvSearch })
-      if (response.data.results.length > 0) {
-        setSearchData(response.data.results)
-        setCurrentPage(1)
-        setIsLoading(false)
-      } else {
-        setSearchData([])
-        setIsLoading(false)
-        window.alert(`${tvSearch} not found!`)
-      }
-    } catch (error) {
-      console.log(error)
-      setIsLoading(false)
-      setSearchData([])
-      window.alert(`No results found for ${tvSearch}`)
-      setTvSearch('')
-    }
-  }
-
   if (isLoading) {
     return (
       <div className='flex justify-center items-center h-screen w-full'>
@@ -65,40 +40,11 @@ const Tv = ({ tvData, loading }) => {
 
   return (
     <>
-      <div className='w-full h-full flex justify-end p-3 pb-10'>
-        <form
-          onSubmit={handleSubmit}
-          className='flex w-full md:w-auto items-center gap-2'
-        >
-          <input
-            className='w-full h-full bg-transparent border-b focus:outline-none'
-            type='text'
-            placeholder='Search...'
-            value={tvSearch}
-            onChange={(e) => setTvSearch(e.target.value)}
-          />
-          {tvSearch && (
-            <button
-              type='button'
-              className='p-1'
-              onClick={() => {
-                setTvSearch('')
-                setSearchData([])
-                setCurrentPage(1)
-              }}
-            >
-              <AiOutlineClose className='text-lg text-red-500' />
-            </button>
-          )}
-
-          <button
-            type='submit'
-            className='flex-shrink-0 bg-green-500 hover:bg-green-700 border-green-500 hover:border-green-700 text-sm border-4 text-white py-1 px-2 rounded'
-          >
-            <AiOutlineSearch className='text-lg' />
-          </button>
-        </form>
-      </div>
+      <Search
+        setSearchData={setSearchData}
+        setIsLoading={setIsLoading}
+        setCurrentPage={setCurrentPage}
+      />
 
       <div className='w-full h-full flex flex-wrap'>
         {currentItems.map((trending, index) => (
