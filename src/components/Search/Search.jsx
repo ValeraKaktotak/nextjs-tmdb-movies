@@ -3,15 +3,27 @@ import axios from 'axios'
 import { useState } from 'react'
 import { AiOutlineClose, AiOutlineSearch } from 'react-icons/ai'
 
-const Search = ({ setSearchData, setIsLoading, setCurrentPage }) => {
+const Search = ({
+  setSearchData,
+  setIsLoading,
+  setCurrentPage,
+  searchType = 'default'
+}) => {
   //search data
-  const [tvSearch, setTvSearch] = useState('')
+  const [search, setSearch] = useState('')
+  let type = ''
+
+  if (searchType === 'tv' || searchType === 'default') {
+    type = 'searchtv'
+  } else {
+    type = 'searchmovies'
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     setIsLoading(true)
     try {
-      const response = await axios.post('/api/searchtv', { tvSearch })
+      const response = await axios.post(`/api/${type}`, { search })
       if (response.data.results.length > 0) {
         setSearchData(response.data.results)
         setCurrentPage(1)
@@ -19,14 +31,14 @@ const Search = ({ setSearchData, setIsLoading, setCurrentPage }) => {
       } else {
         setSearchData([])
         setIsLoading(false)
-        window.alert(`${tvSearch} not found!`)
+        window.alert(`${search} not found!`)
       }
     } catch (error) {
       console.log(error)
       setIsLoading(false)
       setSearchData([])
-      window.alert(`No results found for ${tvSearch}`)
-      setTvSearch('')
+      window.alert(`No results found for ${search}`)
+      setSearch('')
     }
   }
 
@@ -40,15 +52,15 @@ const Search = ({ setSearchData, setIsLoading, setCurrentPage }) => {
           className='w-full h-full bg-transparent border-b focus:outline-none'
           type='text'
           placeholder='Search...'
-          value={tvSearch}
-          onChange={(e) => setTvSearch(e.target.value)}
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
         />
-        {tvSearch && (
+        {search && (
           <button
             type='button'
             className='p-1'
             onClick={() => {
-              setTvSearch('')
+              setSearch('')
               setSearchData([])
               setCurrentPage(1)
             }}

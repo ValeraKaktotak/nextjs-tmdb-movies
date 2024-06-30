@@ -8,7 +8,6 @@ import YouTube from 'react-youtube'
 
 const ModalMui = ({ open, setOpen, selectedTitle, setSelectedTitle }) => {
   const [trailerKey, setTrailerKey] = useState(null)
-  console.log(selectedTitle)
 
   const handleClickClose = (title) => {
     setSelectedTitle(null)

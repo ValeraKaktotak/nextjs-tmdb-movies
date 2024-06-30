@@ -39,6 +39,7 @@ const Tv = ({ tvData, loading }) => {
   return (
     <>
       <Search
+        searchType='tv'
         setSearchData={setSearchData}
         setIsLoading={setIsLoading}
         setCurrentPage={setCurrentPage}

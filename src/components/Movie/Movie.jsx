@@ -39,6 +39,7 @@ const Movie = ({ movieData, loading }) => {
   return (
     <>
       <Search
+        searchType='movie'
         setSearchData={setSearchData}
         setIsLoading={setIsLoading}
         setCurrentPage={setCurrentPage}
