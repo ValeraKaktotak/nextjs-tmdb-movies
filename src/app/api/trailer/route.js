@@ -5,7 +5,7 @@ const key = process.env.API_KEY
 
 export async function POST(req) {
   try {
-    const { media_type, id } = await req.json()
+    const { media_type = 'movie', id } = await req.json()
     const response = await axios.get(
       `https://api.themoviedb.org/3/${media_type}/${id}/videos?api_key=${key}&language=en-US`
     )
