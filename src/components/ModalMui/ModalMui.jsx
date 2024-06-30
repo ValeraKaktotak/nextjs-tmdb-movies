@@ -53,22 +53,7 @@ const ModalMui = ({ open, setOpen, selectedTitle, setSelectedTitle }) => {
       <DialogContent className='flex flex-col items-center'>
         {selectedTitle && (
           <>
-            {selectedTitle.media_type === 'tv' || !selectedTitle.media_type ? (
-              <>
-                <Image
-                  src={`https://image.tmdb.org/t/p/original${selectedTitle.poster_path}`}
-                  alt={selectedTitle.original_title || selectedTitle.title}
-                  width={500}
-                  height={500}
-                  layout='responsive'
-                  priority={true}
-                  className='object-contain max-h-[500px]'
-                />
-                <div style={{ maxHeight: '200px', overflowY: 'auto' }}>
-                  <p className='p-4'>{selectedTitle.overview}</p>
-                </div>
-              </>
-            ) : (
+            {selectedTitle.video === false ? (
               <>
                 {/* Show trailer for movies */}
                 {trailerKey ? (
@@ -91,6 +76,21 @@ const ModalMui = ({ open, setOpen, selectedTitle, setSelectedTitle }) => {
                     <PlayArrowIcon />
                   </IconButton>
                 )}
+                <div style={{ maxHeight: '200px', overflowY: 'auto' }}>
+                  <p className='p-4'>{selectedTitle.overview}</p>
+                </div>
+              </>
+            ) : (
+              <>
+                <Image
+                  src={`https://image.tmdb.org/t/p/original${selectedTitle.poster_path}`}
+                  alt={selectedTitle.original_title || selectedTitle.title}
+                  width={500}
+                  height={500}
+                  layout='responsive'
+                  priority={true}
+                  className='object-contain max-h-[500px]'
+                />
                 <div style={{ maxHeight: '200px', overflowY: 'auto' }}>
                   <p className='p-4'>{selectedTitle.overview}</p>
                 </div>
