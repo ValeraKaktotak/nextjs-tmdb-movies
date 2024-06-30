@@ -8,6 +8,7 @@ import YouTube from 'react-youtube'
 
 const ModalMui = ({ open, setOpen, selectedTitle, setSelectedTitle }) => {
   const [trailerKey, setTrailerKey] = useState(null)
+  console.log(selectedTitle)
 
   const handleClickClose = (title) => {
     setSelectedTitle(null)
@@ -52,7 +53,7 @@ const ModalMui = ({ open, setOpen, selectedTitle, setSelectedTitle }) => {
       <DialogContent className='flex flex-col items-center'>
         {selectedTitle && (
           <>
-            {selectedTitle.media_type === 'tv' ? (
+            {selectedTitle.media_type === 'tv' || !selectedTitle.media_type ? (
               <>
                 <Image
                   src={`https://image.tmdb.org/t/p/original${selectedTitle.poster_path}`}
